@@ -1,0 +1,27 @@
+
+services:
+  frontend:
+    image: node:18-slim
+    container_name: lcs-frontend
+    command: ./run.sh
+    working_dir: /frontend
+    ports:
+      - "3000:3000"
+    environment:
+    - API_URL=http://lcs-api:5000/test/json
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /frontend
+
+  # api:
+  #   image: mcr.microsoft.com/dotnet/sdk:7.0
+  #   container_name: lcs-api
+  #   command: dotnet watch run --urls http://0.0.0.0:5000/
+  #   working_dir: /api
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - type: bind
+  #       source: ./api
+  #       target: /api
