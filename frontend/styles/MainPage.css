@@ -30,6 +30,9 @@
 
 input[type="text"] {
   padding: 8px;
+  border-width: 0.2px;
+  border-color: lightgrey;
+  border-radius: 5px;
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
