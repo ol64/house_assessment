@@ -58,3 +58,9 @@ export const OPTIONS_STATES = [
   { value: "Wisconsin", label: "Wisconsin" },
   { value: "Wyoming", label: "Wyoming" },
 ];
+
+export const OPTIONS_SORT = [
+  { value: "firstname", label: "Name" },
+  { value: "party", label: "Party" },
+  { value: "state", label: "State" },
+];

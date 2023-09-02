@@ -5,6 +5,13 @@
 }
 
 /* Search/Filter Options */
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 1%;
+}
+
 .filter_options {
   display: flex;
   flex-direction: row;
@@ -14,8 +21,6 @@
   width: 200px;
   padding: 6px;
   border: none;
-  margin-top: 8px;
-  margin-right: 16px;
   font-size: 17px;
 }
 
@@ -23,8 +28,6 @@
   width: 300px;
   padding: 6px;
   border: none;
-  margin-top: 8px;
-  margin-right: 16px;
   font-size: 17px;
 }
 
@@ -33,16 +36,30 @@ input[type="text"] {
   border-width: 0.2px;
   border-color: lightgrey;
   border-radius: 5px;
-  margin-top: 8px;
-  margin-right: 16px;
   font-size: 17px;
 }
 
 .clear_filter {
   padding: 8px;
   border: none;
-  margin-top: 8px;
-  margin-right: 16px;
   font-size: 17px;
   background: none;
+}
+
+/* Sort */
+.sort {
+  display: flex;
+  flex-direction: row;
+}
+
+.toggle_sort {
+  width: 30px;
+  height: auto;
+}
+
+.sort_by {
+  width: 150px;
+  padding: 6px;
+  border: none;
+  font-size: 17px;
 }
