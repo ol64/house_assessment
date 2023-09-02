@@ -1,23 +1,23 @@
 .member_card {
-	height: 250px;
+  height: 250px;
   width: 175px;
-	margin: 7px 7px 7px;
-	background-color: #dce9f2;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	padding: 10px;
-	justify-content: center;
-	align-items: center;
+  margin: 7px 7px 7px;
+  background-color: #dce9f2;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .member_card > .member_info {
-	flex-grow: 2;
-	font-weight: lighter;
-	font-size: 14px;
-	font-weight: bold;
-	text-decoration: none;
-	color: black;
+  flex-grow: 2;
+  font-weight: lighter;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
 }
 
 h2 {
