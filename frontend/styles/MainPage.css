@@ -11,6 +11,16 @@
 }
 
 .party_filter {
+  width: 200px;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+.states_filter {
+  width: 300px;
   padding: 6px;
   border: none;
   margin-top: 8px;
@@ -19,9 +29,17 @@
 }
 
 input[type="text"] {
-  padding: 6px;
+  padding: 8px;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+.clear_filter {
+  padding: 8px;
   border: none;
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
+  background: none;
 }

@@ -46,6 +46,7 @@ export default function MainPage({ ...props }: IProps) {
     <main className="main-container">
       <div className="filter_options">
         <Select
+          className="party_filter"
           value={party}
           options={OPTIONS_PARTIES}
           placeholder="Search by Party"
@@ -57,9 +58,9 @@ export default function MainPage({ ...props }: IProps) {
             name="states"
             value={states}
             options={OPTIONS_STATES}
-            className="basic-multi-select"
+            className={"basic-multi-select states_filter"}
             classNamePrefix="select"
-            placeholder="Select states..."
+            placeholder="Select States..."
             onChange={(e) => setStates(e)}
           />
         </div>
@@ -69,7 +70,10 @@ export default function MainPage({ ...props }: IProps) {
           placeholder="Search by Name..."
           onChange={(e) => setName(e.target.value)}
         />
-        <button onClick={handleReset}> Clear Filters </button>
+        <button className="clear_filter" onClick={handleReset}>
+          {" "}
+          Clear Filters{" "}
+        </button>
       </div>
       <MemberList members={filteredMembers} />
     </main>
