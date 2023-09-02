@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import MemberList from './MemberList';
 import '@/styles/MainPage.css';
-import { getMembers } from '@/utils/helpers';
+import { getMembers, getMembersByName } from '@/utils/helpers';
 
 
 interface IProps {
@@ -12,24 +12,28 @@ interface IProps {
 
 export default function MainPage({ ...props}: IProps) {
   const [party, setParty] = useState("all")
+  const [name, setName] = useState("")
   
-  // filter based on party
-  var filtered_members = props.members
+  // Filter based on party
+  var filteredMembers = props.members
   if (party != "all") {
-    filtered_members = filtered_members.filter((e) => e?.['member-info'].party == party)
+    filteredMembers = filteredMembers.filter((e) => e?.['member-info'].party == party)
   }
+
+  // Search by name
+  if (name) filteredMembers = getMembersByName(filteredMembers, name)
 
   return (
     <main className="main-container">
-      <div className="party-filter">
-        <label data-for="party"> Party: </label>
-        <select name="party" id="party" onChange={(e) => setParty(e.target.value)}>
-          <option value="all">All Parties</option>
+      <div className="filter_options">
+        <select className="party_filter" name="party" id="party" onChange={(e) => setParty(e.target.value)}>
+          <option value="all">Search by Party</option>
           <option value="D">Democratic</option>
           <option value="R">Republican</option>
         </select>
+        <input type="text" placeholder="Search By Name..." onChange={(e) => setName(e.target.value)}/>
       </div>
-      <MemberList members={filtered_members} />
+      <MemberList members={filteredMembers} />
     </main>
   );
 }

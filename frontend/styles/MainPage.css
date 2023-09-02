@@ -1,0 +1,27 @@
+/* Main Page */
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search/Filter Options */
+.filter_options {
+  display: flex;
+  flex-direction: row;
+}
+
+.party_filter {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+input[type=text] {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
