@@ -5,3 +5,13 @@
   justify-content: center;
   background: grey;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+.pagination button {
+  padding: 10px;
+}

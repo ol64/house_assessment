@@ -2,7 +2,10 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortAlphaAsc, faSortAlphaDesc } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSortAlphaAsc,
+  faSortAlphaDesc,
+} from "@fortawesome/free-solid-svg-icons";
 
 import MemberList from "./MemberList";
 import "@/styles/MainPage.css";
@@ -11,6 +14,7 @@ import {
   OPTIONS_PARTIES,
   OPTIONS_STATES,
   OPTIONS_SORT,
+  ITEMS_PER_PAGE,
 } from "@/utils/constants";
 
 interface IProps {
@@ -24,6 +28,7 @@ export default function MainPage({ ...props }: IProps) {
   const [sort, setSort] = useState<any | null>(null);
   const [sortOrder, setSortOrder] = useState("desc");
   const [sortIcon, setSortIcon] = useState(faSortAlphaAsc);
+  const [pageNumber, setPageNumber] = useState(1);
 
   // Filter by party
   var filteredMembers = props.members;
@@ -44,13 +49,6 @@ export default function MainPage({ ...props }: IProps) {
 
   // Search by name
   if (name) filteredMembers = getMembersByName(filteredMembers, name);
-
-  // Clear all filters
-  const handleReset = () => {
-    setParty(null);
-    setStates(null);
-    setName(null);
-  };
 
   // Sort
   // TODO: traverse through the json file more efficiently
@@ -106,6 +104,38 @@ export default function MainPage({ ...props }: IProps) {
     }
   };
 
+  const handlePartyFilter = (e) => {
+    setParty(e);
+    setPageNumber(1);
+  };
+
+  const handleStatesFilter = (e) => {
+    setStates(e);
+    setPageNumber(1);
+  };
+
+  const handleNameSearch = (e) => {
+    setName(e.target.value);
+    setPageNumber(1);
+  };
+
+  // Clear all filters
+  const handleReset = () => {
+    setParty(null);
+    setStates(null);
+    setName(null);
+    setPageNumber(1);
+  };
+
+  const handleSort = (e) => {
+    setSort(e);
+    setPageNumber(1);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPageNumber(newPage);
+  };
+
   return (
     <main className="main-container">
       <div className="list">
@@ -115,7 +145,7 @@ export default function MainPage({ ...props }: IProps) {
             value={party}
             options={OPTIONS_PARTIES}
             placeholder="Search by Party"
-            onChange={(e) => setParty(e)}
+            onChange={handlePartyFilter}
           />
 
           <Select
@@ -124,14 +154,14 @@ export default function MainPage({ ...props }: IProps) {
             options={OPTIONS_STATES}
             className={"basic-multi-select states_filter"}
             placeholder="Select States..."
-            onChange={(e) => setStates(e)}
+            onChange={handleStatesFilter}
           />
 
           <input
             value={name}
             type="text"
             placeholder="Search by Name..."
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameSearch}
           />
 
           <button className="clear_filter" onClick={handleReset}>
@@ -144,8 +174,8 @@ export default function MainPage({ ...props }: IProps) {
             className="sort_by"
             value={sort}
             options={OPTIONS_SORT}
-            placeholder="Sory By:"
-            onChange={(e) => setSort(e)}
+            placeholder="Sort By:"
+            onChange={handleSort}
           />
           <FontAwesomeIcon
             onClick={handleSortOrder}
@@ -154,7 +184,12 @@ export default function MainPage({ ...props }: IProps) {
           />
         </div>
       </div>
-      <MemberList members={filteredMembers} />
+      <MemberList
+        members={filteredMembers}
+        itemsPerPage={ITEMS_PER_PAGE}
+        pageNumber={pageNumber}
+        changePage={handlePageChange}
+      />
     </main>
   );
 }
