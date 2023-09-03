@@ -4,6 +4,8 @@
   flex-wrap: wrap;
   justify-content: center;
   background: grey;
+  padding: 20px;
+  row-gap: 20px;
 }
 
 .pagination {
@@ -13,5 +15,8 @@
 }
 
 .pagination button {
-  padding: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
 }

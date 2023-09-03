@@ -1,5 +1,3 @@
-import { getMembers, getMemberName } from "@/utils/helpers";
-
 import "@/styles/MemberCard.css";
 
 interface IProps {
@@ -10,14 +8,15 @@ export default function MemberCard({ ...props }: IProps) {
   const member_info = props.member?.["member-info"];
 
   return (
-    <ol className="member_card">
-      <h2>{`${member_info.firstname} ${member_info.lastname}`}</h2>
-      <img src="/images/blank_profile.png" />
-      <div className="member_info">
-        <p>State: {`${member_info.state?.["state-fullname"]}`}</p>
-        <p>Party: {`${member_info.party}`}</p>
-        <p>Committee Assignments</p>
+    <div className="card" data-style="width: 18rem;">
+      <img className="card-img-top" src="..." alt="Headshots" />
+      <div className="card-body">
+        <h5 className="card-title">{`${member_info.firstname} ${member_info.lastname}`}</h5>
+        <div className="card-text">
+          <p>State: {`${member_info.state?.["state-fullname"]}`}</p>
+          <p>Party: {`${member_info.party}`}</p>
+        </div>
       </div>
-    </ol>
+    </div>
   );
 }
