@@ -5,6 +5,7 @@ import "@/styles/MemberList.css";
 
 interface IProps {
   members: Array<any>;
+  committees: Array<any>;
   pageNumber: number;
   changePage: Function;
 }
@@ -12,7 +13,7 @@ interface IProps {
 export default function MemberList({ ...props }: IProps) {
   // Determine the max number of items that can be displayed in the page
   const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
-  const cardWidth = 225; // Width defined in css
+  const cardWidth = 275; // Width defined in css
   const numRows = 2;
   const numCols = pageWidth ? Math.floor(pageWidth / cardWidth) - 1 : 5;
   const itemsPerPage = numRows * numCols;
@@ -43,7 +44,11 @@ export default function MemberList({ ...props }: IProps) {
     <div className="member-content">
       <ol className="member-list">
         {currentData.map((member: any) => (
-          <MemberCard key={member.statedistrict} member={member} />
+          <MemberCard
+            key={member.statedistrict}
+            member={member}
+            committees={props.committees}
+          />
         ))}
       </ol>
       <div className="pagination">

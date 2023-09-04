@@ -60,7 +60,7 @@ export const OPTIONS_STATES = [
 ];
 
 export const OPTIONS_SORT = [
-  { value: "firstname", label: "Name" },
+  { value: "lastname", label: "Last Name" },
   { value: "party", label: "Party" },
   { value: "state", label: "State" },
 ];

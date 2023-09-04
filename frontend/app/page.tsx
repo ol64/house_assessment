@@ -1,5 +1,5 @@
 import MainPage from "@/components/MainPage";
-import { fetchMemberData, getMembers } from "@/utils/helpers";
+import { fetchMemberData, getMembers, getCommittees } from "@/utils/helpers";
 
 import "@/styles/page.css";
 
@@ -11,7 +11,7 @@ export default async function App() {
       <header>
         <h1>United States Representatives</h1>
       </header>
-      <MainPage members={getMembers(data)} />
+      <MainPage members={getMembers(data)} committees={getCommittees(data)} />
     </main>
   );
 }

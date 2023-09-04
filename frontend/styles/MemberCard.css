@@ -1,11 +1,15 @@
 .card {
   height: max-content;
-  width: 225px;
+  width: 275px;
   margin: 7px 7px 7px;
 }
 
-.card-text p {
+.card-text {
   margin: 2px;
+}
+
+.card-text p {
+  margin: 1px;
 }
 
 center {
@@ -20,4 +24,12 @@ center {
   border-top-right-radius: calc(0.25rem - 1px);
   justify-content: center;
   margin: auto;
+}
+
+.card-text .committees:hover {
+  color: #124a8d;
+}
+
+.modal {
+  justify-center: center;
 }

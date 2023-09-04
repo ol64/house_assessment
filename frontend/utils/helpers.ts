@@ -2,7 +2,7 @@ import { MEMBER_API } from "./constants";
 
 /**
  * Returns Member data from API
- * @returns {Promise<Record<string, any>}
+ * @returns {Promise<Record<string, any>>}
  */
 export const fetchMemberData = async (): Promise<Record<string, any>> => {
   const res = await fetch(MEMBER_API);
@@ -23,6 +23,17 @@ export const getMembers = (
   data: Record<string, any>
 ): Record<string, any>[] => {
   return data?.MemberData?.members?.member || [];
+};
+
+/**
+ * Parses API response and returns a list of committees and subcommittees
+ * @param data - API response
+ * @returns {Record<string ,any>[]}
+ */
+export const getCommittees = (
+  data: Record<string, any>
+): Record<string, any>[] => {
+  return data?.MemberData?.committees?.committee || [];
 };
 
 /**
@@ -61,3 +72,51 @@ export const getMembersByName = (
 
   return filteredMembers;
 };
+
+/**
+ * Helper method to return all relevant subcommittees
+ * @param comcode
+ * @param subcommittees
+ * @param committeesInfo
+ * @returns {Record<string,any>[]}
+ */
+export const getSubcommitteesNames = (
+  comcode: string,
+  subcommittees: Record<string, any>[],
+  committeesInfo: Record<string, any>[]
+) => {
+  return subcommittees
+    .filter((e) => {
+      const subcomcode = e?.["@subcomcode"];
+      return subcomcode ? subcomcode.includes(comcode.slice(0, 2)) : false;
+    })
+    .map((e) => {
+      const committeeInfo = findCommitteeInfo(
+        e?.["@subcomcode"],
+        committeesInfo
+      );
+
+      const subcommittee =
+        committeeInfo && committeeInfo?.subcommittee
+          ? committeeInfo?.subcommittee.find(
+              (subcommittee) =>
+                subcommittee?.["@subcomcode"] === e?.["@subcomcode"]
+            )
+          : {};
+
+      return subcommittee
+        ? subcommittee?.["subcommittee-fullname"]
+        : e?.["@subcomcode"];
+    });
+};
+
+/**
+ * Helper method to find information about the committee
+ * @param code
+ * @param committeesInfo
+ * @returns {Record<string,any>}
+ */
+export const findCommitteeInfo = (
+  code: string,
+  committeesInfo: Array<Record<string, any>>
+) => committeesInfo.find((e) => e?.["@comcode"].includes(code.slice(0, 2)));

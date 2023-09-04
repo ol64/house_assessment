@@ -18,7 +18,8 @@ import {
 } from "@/utils/constants";
 
 interface IProps {
-  members: Array<any>;
+  members: Array<Record<string, any>>;
+  committees: Array<Record<string, any>>;
 }
 
 export default function MainPage({ ...props }: IProps) {
@@ -186,6 +187,7 @@ export default function MainPage({ ...props }: IProps) {
       </div>
       <MemberList
         members={filteredMembers}
+        committees={props.committees}
         pageNumber={pageNumber}
         changePage={handlePageChange}
       />
