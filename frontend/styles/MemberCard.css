@@ -4,6 +4,21 @@
   margin: 7px 7px 7px;
 }
 
+center {
+  padding: 1.25rem;
+  padding-bottom: 0;
+}
+
+.headshot {
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  justify-content: center;
+  margin: auto;
+}
+
 .card-text {
   margin: 2px;
 }
@@ -12,24 +27,6 @@
   margin: 1px;
 }
 
-center {
-  padding: 1.25rem;
-  padding-bottom: 0;
-}
-
-.headshot {
-  height: auto;
-  max-width: 100%;
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px);
-  justify-content: center;
-  margin: auto;
-}
-
 .card-text .committees:hover {
   color: #124a8d;
-}
-
-.modal {
-  justify-center: center;
 }

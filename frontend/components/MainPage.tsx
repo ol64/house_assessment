@@ -7,19 +7,19 @@ import {
   faSortAlphaAsc,
   faSortAlphaDesc,
 } from "@fortawesome/free-solid-svg-icons";
-
-import MemberList from "./MemberList";
-import "@/styles/MainPage.css";
-import { getMembersByName } from "@/utils/helpers";
 import {
   OPTIONS_PARTIES,
   OPTIONS_STATES,
   OPTIONS_SORT,
 } from "@/utils/constants";
+import { getMembersByName, compareWords } from "@/utils/helpers";
+import MemberList from "./MemberList";
+
+import "@/styles/MainPage.css";
 
 interface IProps {
-  members: Array<Record<string, any>>;
-  committees: Array<Record<string, any>>;
+  members: Record<string, any>[];
+  committees: Record<string, any>[];
 }
 
 export default function MainPage({ ...props }: IProps) {
@@ -33,7 +33,7 @@ export default function MainPage({ ...props }: IProps) {
 
   // Filter by party
   var filteredMembers = props.members;
-  if (party && Object.keys(party).length && party.value != "NA") {
+  if (party && party.value != "NA") {
     filteredMembers = filteredMembers.filter(
       (e) => e?.["member-info"].party == party.value
     );
@@ -53,25 +53,16 @@ export default function MainPage({ ...props }: IProps) {
 
   // Sort
   // TODO: traverse through the json file more efficiently
-  // TODO: create helper methods for repeating code
   if (sort) {
     const category = sort.value;
 
-    // state needs an extra layer of traversal
+    // category-state needs an extra layer of traversal
     if (category === "state") {
       filteredMembers.sort((a, b) => {
         if (a && b) {
           const stateOne = a?.["member-info"].state?.["state-fullname"] || "";
           const stateTwo = b?.["member-info"].state?.["state-fullname"] || "";
-          if (stateOne === "" && stateTwo !== "") {
-            return 1;
-          } else if (stateOne !== "" && stateTwo === "") {
-            return -1;
-          } else if (sortOrder === "desc") {
-            return stateOne.localeCompare(stateTwo);
-          } else {
-            return stateTwo.localeCompare(stateOne);
-          }
+          return compareWords(stateOne, stateTwo, sortOrder);
         }
       });
     } else {
@@ -80,30 +71,11 @@ export default function MainPage({ ...props }: IProps) {
         if (a && b) {
           const wordOne = a?.["member-info"][category] || "";
           const wordTwo = b?.["member-info"][category] || "";
-          if (wordOne === "" && wordTwo !== "") {
-            return 1;
-          } else if (wordOne !== "" && wordTwo === "") {
-            return -1;
-          } else if (sortOrder === "desc") {
-            return wordOne.localeCompare(wordTwo);
-          } else {
-            return wordTwo.localeCompare(wordOne);
-          }
+          return compareWords(wordOne, wordTwo, sortOrder);
         }
       });
     }
   }
-
-  // Sort Asc or Desc according to toggle
-  const handleSortOrder = () => {
-    if (sortOrder === "desc") {
-      setSortOrder("asc");
-      setSortIcon(faSortAlphaAsc);
-    } else {
-      setSortOrder("desc");
-      setSortIcon(faSortAlphaDesc);
-    }
-  };
 
   const handlePartyFilter = (e: Record<string, any>) => {
     setParty(e);
@@ -131,6 +103,17 @@ export default function MainPage({ ...props }: IProps) {
   const handleSort = (e: Record<string, any>) => {
     setSort(e);
     setPageNumber(1);
+  };
+
+  // Sort Asc or Desc according to toggle
+  const handleSortOrder = () => {
+    if (sortOrder === "desc") {
+      setSortOrder("asc");
+      setSortIcon(faSortAlphaAsc);
+    } else {
+      setSortOrder("desc");
+      setSortIcon(faSortAlphaDesc);
+    }
   };
 
   const handlePageChange = (newPage: number) => {

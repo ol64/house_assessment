@@ -26,7 +26,7 @@ export const getMembers = (
 };
 
 /**
- * Parses API response and returns a list of committees and subcommittees
+ * Parses API response and returns a list of all committees and subcommittees
  * @param data - API response
  * @returns {Record<string ,any>[]}
  */
@@ -36,23 +36,24 @@ export const getCommittees = (
   return data?.MemberData?.committees?.committee || [];
 };
 
-/**
- * Parses Member data and returns the member's name
- * @param member
- * @returns {string}
- */
-export const getMemberName = (member: Record<string, any>): string => {
-  return member?.["member-info"]?.namelist || "";
-};
+// UNUSED
+// /**
+//  * Parses Member data and returns the member's name
+//  * @param member
+//  * @returns {string}
+//  */
+// export const getMemberName = (member: Record<string, any>): string => {
+//   return member?.["member-info"]?.namelist || "";
+// };
 
 /**
- * Helper method to check if searched name is in the list of members
+ * Helper method to search for specific members based on Name
  * @param members
  * @param searchedWords
- * @returns {Array<any>}
+ * @returns {Record<string, any>[]}
  */
 export const getMembersByName = (
-  members: Array<any>,
+  members: Record<string, any>[],
   searchedWords: string
 ): Array<any> => {
   const words: Array<string> = searchedWords.split(" ");
@@ -74,7 +75,43 @@ export const getMembersByName = (
 };
 
 /**
- * Helper method to return all relevant subcommittees
+ * Helper method to compare words according to sort preferences
+ * @param wordOne
+ * @param wordTwo
+ * @param sortOrder
+ * @returns {number}
+ */
+export const compareWords = (
+  wordOne: string,
+  wordTwo: string,
+  sortOrder: string
+) => {
+  if (wordOne === "" && wordTwo !== "") {
+    return 1;
+  } else if (wordOne !== "" && wordTwo === "") {
+    return -1;
+  } else if (sortOrder === "desc") {
+    return wordOne.localeCompare(wordTwo);
+  } else {
+    return wordTwo.localeCompare(wordOne);
+  }
+};
+
+/**
+ * Helper method to find information about the committee given
+ * committee or subcommittee code
+ * @param code
+ * @param committeesInfo
+ * @returns {Record<string,any>}
+ */
+export const findCommitteeInfo = (
+  code: string,
+  committeesInfo: Record<string, any>[]
+) => committeesInfo.find((e) => e?.["@comcode"].includes(code.slice(0, 2)));
+
+/**
+ * Helper method to return all relevant subcommittees by Name given
+ * committee code and list of subcommittees assignments for a member
  * @param comcode
  * @param subcommittees
  * @param committeesInfo
@@ -109,14 +146,3 @@ export const getSubcommitteesNames = (
         : e?.["@subcomcode"];
     });
 };
-
-/**
- * Helper method to find information about the committee
- * @param code
- * @param committeesInfo
- * @returns {Record<string,any>}
- */
-export const findCommitteeInfo = (
-  code: string,
-  committeesInfo: Array<Record<string, any>>
-) => committeesInfo.find((e) => e?.["@comcode"].includes(code.slice(0, 2)));

@@ -1,10 +1,11 @@
 "use client";
-import "@/styles/MemberCard.css";
-import blankPhoto from "@/images/blank_profile.png";
-import Image from "next/image";
-import { Button, Modal } from "react-bootstrap";
 import React, { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import Image from "next/image";
+import blankPhoto from "@/images/blank_profile.png";
 import { getSubcommitteesNames, findCommitteeInfo } from "@/utils/helpers";
+
+import "@/styles/MemberCard.css";
 
 interface IProps {
   member: Record<string, any>;
@@ -19,11 +20,12 @@ export default function MemberCard({ ...props }: IProps) {
   const handleShow = () => setShowAssignments(true);
   const handleClose = () => setShowAssignments(false);
 
+  // For each member, map assigned committee to assigned subcommittees
   var committeesMap: Record<string, any> = {};
   var committees = committeeAssignments?.committee;
   const subcommittees = committeeAssignments?.subcommittee;
 
-  // Special scenario where committee in xml is an object rather than an array
+  // Unique scenario where committee in XML is an object rather than an array
   if (typeof committees === "object" && !Array.isArray(committees)) {
     committees = [committees];
   }
@@ -36,14 +38,10 @@ export default function MemberCard({ ...props }: IProps) {
         const info = findCommitteeInfo(comcode, props.committees);
         const committeeName = info ? info?.["committee-fullname"] : comcode;
 
-        if (memberInfo?.namelist === "Rogers, Mike") {
-          console.log("yes");
-          console.log(props.member?.["committee-assignments"]);
-        }
-
+        // Filter out all the assigned subcommittees based on comcode
+        // and convert subcomcode to name
         var subcommitteesNames = [];
         if (subcommittees && subcommittees.length) {
-          // Filter out all the relevant subcommittees and convert subcomcode to name
           subcommitteesNames = getSubcommitteesNames(
             comcode,
             subcommittees,
@@ -55,6 +53,7 @@ export default function MemberCard({ ...props }: IProps) {
       }
     });
   }
+
   return (
     <div className="card" data-style="width: 18rem;">
       <center>
