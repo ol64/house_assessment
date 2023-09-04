@@ -6,8 +6,6 @@ export const OPTIONS_PARTIES = [
   { value: "R", label: "Republican" },
 ];
 
-export const ITEMS_PER_PAGE = 12;
-
 export const OPTIONS_STATES = [
   { value: "Alabama", label: "Alabama" },
   { value: "Alaska", label: "Alaska" },

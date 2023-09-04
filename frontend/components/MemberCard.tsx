@@ -1,4 +1,6 @@
 import "@/styles/MemberCard.css";
+import blankPhoto from "@/images/blank_profile.png";
+import Image from "next/image";
 
 interface IProps {
   member: Record<string, any>;
@@ -9,7 +11,15 @@ export default function MemberCard({ ...props }: IProps) {
 
   return (
     <div className="card" data-style="width: 18rem;">
-      <img className="card-img-top" src="..." alt="Headshots" />
+      <center>
+        <Image
+          className="headshot"
+          src={blankPhoto}
+          alt="Headshots"
+          width={200}
+          height={200}
+        />
+      </center>
       <div className="card-body">
         <h5 className="card-title">{`${member_info.firstname} ${member_info.lastname}`}</h5>
         <div className="card-text">

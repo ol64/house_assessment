@@ -1,9 +1,23 @@
 .card {
-  height: 250px;
+  height: max-content;
   width: 225px;
   margin: 7px 7px 7px;
 }
 
 .card-text p {
   margin: 2px;
+}
+
+center {
+  padding: 1.25rem;
+  padding-bottom: 0;
+}
+
+.headshot {
+  height: auto;
+  max-width: 100%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  justify-content: center;
+  margin: auto;
 }

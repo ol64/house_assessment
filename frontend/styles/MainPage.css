@@ -9,9 +9,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 1%;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin: 0 2.5%;
 }
 
 .filter_options {
@@ -35,10 +33,12 @@
 
 input[type="text"] {
   padding: 8px;
+  margin-top: 6px;
   border-width: 0.2px;
   border-color: lightgrey;
   border-radius: 5px;
   font-size: 17px;
+  height: min-content;
 }
 
 .clear_filter {
@@ -46,17 +46,20 @@ input[type="text"] {
   border: none;
   font-size: 17px;
   background: none;
+  height: min-content;
 }
 
 /* Sort */
 .sort {
   display: flex;
   flex-direction: row;
+  height: min-content;
 }
 
 .toggle_sort {
   width: 30px;
   height: auto;
+  max-height: min-content;
 }
 
 .sort_by {

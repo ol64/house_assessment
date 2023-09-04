@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  IconDefinition,
   faSortAlphaAsc,
   faSortAlphaDesc,
 } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +15,6 @@ import {
   OPTIONS_PARTIES,
   OPTIONS_STATES,
   OPTIONS_SORT,
-  ITEMS_PER_PAGE,
 } from "@/utils/constants";
 
 interface IProps {
@@ -22,13 +22,13 @@ interface IProps {
 }
 
 export default function MainPage({ ...props }: IProps) {
-  const [party, setParty] = useState<any | null>(null);
-  const [states, setStates] = useState<any | null>(null);
-  const [name, setName] = useState<any | null>(null);
-  const [sort, setSort] = useState<any | null>(null);
-  const [sortOrder, setSortOrder] = useState("desc");
-  const [sortIcon, setSortIcon] = useState(faSortAlphaAsc);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [party, setParty] = useState<Record<string, any> | null>(null);
+  const [states, setStates] = useState<Array<Record<string, any>> | null>(null);
+  const [name, setName] = useState<string>("");
+  const [sort, setSort] = useState<Record<string, any> | null>(null);
+  const [sortOrder, setSortOrder] = useState<string>("desc");
+  const [sortIcon, setSortIcon] = useState<IconDefinition>(faSortAlphaAsc);
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
   // Filter by party
   var filteredMembers = props.members;
@@ -104,17 +104,17 @@ export default function MainPage({ ...props }: IProps) {
     }
   };
 
-  const handlePartyFilter = (e) => {
+  const handlePartyFilter = (e: Record<string, any>) => {
     setParty(e);
     setPageNumber(1);
   };
 
-  const handleStatesFilter = (e) => {
+  const handleStatesFilter = (e: Record<string, any>[]) => {
     setStates(e);
     setPageNumber(1);
   };
 
-  const handleNameSearch = (e) => {
+  const handleNameSearch = (e: Record<string, any>) => {
     setName(e.target.value);
     setPageNumber(1);
   };
@@ -123,11 +123,11 @@ export default function MainPage({ ...props }: IProps) {
   const handleReset = () => {
     setParty(null);
     setStates(null);
-    setName(null);
+    setName("");
     setPageNumber(1);
   };
 
-  const handleSort = (e) => {
+  const handleSort = (e: Record<string, any>) => {
     setSort(e);
     setPageNumber(1);
   };
@@ -186,7 +186,6 @@ export default function MainPage({ ...props }: IProps) {
       </div>
       <MemberList
         members={filteredMembers}
-        itemsPerPage={ITEMS_PER_PAGE}
         pageNumber={pageNumber}
         changePage={handlePageChange}
       />
