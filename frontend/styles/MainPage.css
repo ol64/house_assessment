@@ -1,17 +1,32 @@
 /* Main Page */
-.main-container {
+.main-content {
+  position: relative;
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
 }
 
-/* Search/Filter Options */
-.list {
+.main-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/united_states_flag.png");
+  background-size: 200%;
+  background-position: center;
+  opacity: 0.2;
+}
+
+.organize-list {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 2.5%;
+  margin: 0 3%;
 }
 
+/* Search/Filter Options */
 .filter_options {
   display: flex;
   flex-direction: row;
@@ -32,6 +47,7 @@
 }
 
 input[type="text"] {
+  position: relative;
   padding: 8px;
   margin-top: 6px;
   border-width: 0.2px;
@@ -39,6 +55,17 @@ input[type="text"] {
   border-radius: 5px;
   font-size: 17px;
   height: min-content;
+  background-color: white;
+  opacity: 1;
+}
+
+input::before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
 
 .clear_filter {

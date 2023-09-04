@@ -40,8 +40,8 @@ export default function MemberList({ ...props }: IProps) {
   }, []);
 
   return (
-    <div className="page">
-      <ol className="member_list">
+    <div className="member-content">
+      <ol className="member-list">
         {currentData.map((member: any) => (
           <MemberCard key={member.statedistrict} member={member} />
         ))}

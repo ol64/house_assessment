@@ -137,8 +137,8 @@ export default function MainPage({ ...props }: IProps) {
   };
 
   return (
-    <main className="main-container">
-      <div className="list">
+    <main className="main-content">
+      <div className="organize-list">
         <div className="filter_options">
           <Select
             className="party_filter"
