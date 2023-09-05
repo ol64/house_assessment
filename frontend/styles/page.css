@@ -1,7 +1,7 @@
 main.main-container header {
   background-color: #0a3161;
   text-align: center;
-  padding: 2%;
+  padding: 1.5%;
 }
 
 .main-container {
@@ -13,4 +13,5 @@ main.main-container header {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-style: italic;
   color: white;
+  font-size: 30px;
 }

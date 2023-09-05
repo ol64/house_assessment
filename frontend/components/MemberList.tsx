@@ -13,9 +13,11 @@ interface IProps {
 export default function MemberList({ ...props }: IProps) {
   // Determine the max number of items that can be displayed in the page
   const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
-  const cardWidth = 275; // Width defined in css
+  const cardWidth = 225; // Width defined in css
   const numRows = 2;
-  const numCols = pageWidth ? Math.floor(pageWidth / cardWidth) - 1 : 5;
+  const numCols = pageWidth
+    ? Math.floor((0.96 * pageWidth - 90) / cardWidth) // estimate size of margin, padding, and column-gaps
+    : 5;
   const itemsPerPage = numRows * numCols;
 
   const currentPage = props.pageNumber;

@@ -1,6 +1,6 @@
 .card {
   height: max-content;
-  width: 275px;
+  width: 225px;
   margin: 7px 7px 7px;
 }
 
@@ -19,12 +19,17 @@ center {
   margin: auto;
 }
 
+.card-title {
+  font-size: 18px;
+}
+
 .card-text {
   margin: 2px;
 }
 
 .card-text p {
   margin: 1px;
+  font-size: 13px;
 }
 
 .card-text .committees:hover {

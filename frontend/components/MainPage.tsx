@@ -97,6 +97,9 @@ export default function MainPage({ ...props }: IProps) {
     setParty(null);
     setStates(null);
     setName("");
+    setSort(null);
+    setSortOrder("desc");
+    setSortIcon(faSortAlphaAsc);
     setPageNumber(1);
   };
 
